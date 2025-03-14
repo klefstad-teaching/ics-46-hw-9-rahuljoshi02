@@ -6,10 +6,6 @@ void error(string word1, string word2, string msg) {
     cerr << word1 << ", " << word2 << ": " << msg;
 }
 
-bool edit_distance_within(const std::string& str1, const std::string& str2, int d) {
-
-}
-
 
 bool is_adjacent(const string& word1, const string& word2) {
     if (word1.length() != word2.length()) { return false; }
@@ -26,13 +22,13 @@ bool is_adjacent(const string& word1, const string& word2) {
 
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list) {
     queue<vector<string>> ladder_queue;
-    ladder_queue.push(begin_word);
+    ladder_queue.push({begin_word});
 
     set<string> visited;
     visited.insert(begin_word);
 
     while (!ladder_queue.empty()) {
-        ladder = ladder_queue.front();
+        vector<string> ladder = ladder_queue.front();
         ladder_queue.pop();
         string last_word = ladder.back();
         for (const string & word : word_list) {
@@ -50,4 +46,18 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         }
     }
     return {};
+}
+
+void load_words(set<string> & word_list, const string& file_name) {
+    ifstream file(file_name);
+    string word;
+    while (file >> word) {
+        word_list.insert(word);
+    }
+}
+
+void print_word_ladder(const vector<string>& ladder) {
+    for (const string & word : ladder) {
+        cout << word << " ";
+    }
 }
