@@ -8,7 +8,7 @@ int main() {
     cout << "cat -> dog: " << is_adjacent("cat", "dog") << endl;
     
     set<string> word_list;
-    load_words(word_list, "words.txt");
+    load_words(word_list, "src/words.txt");
     string start = "cat";
     string end = "dog";
     vector<string> ladder = generate_word_ladder(start, end, word_list);
