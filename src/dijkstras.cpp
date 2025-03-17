@@ -37,6 +37,10 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
 
 vector<int> extract_shortest_path(const vector<int>& distances, const vector<int>& previous, int destination) {
     vector<int> path;
+    if (distances[destination] == INF) {
+        return path;
+    }
+
     for (int i = destination; i != -1; i = previous[i]) {
         path.push_back(i);
     }
@@ -44,9 +48,16 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
     return path;
 }
 
+
 void print_path(const vector<int>& v, int total) {
-    for (int i = 0; i < total; ++i) {
-        cout << v[i] << " ";
+    if (path.empty()) {
+        cout << "No path." << endl;
+        return;
     }
-    return;
+
+    for (size_t i = 0; i < path.size(); i++) {
+        if (i > 0) cout << " ";
+        cout << path[i];
+    }
+    cout << "Total cost is : " << total << endl;
 }
